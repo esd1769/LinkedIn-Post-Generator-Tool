@@ -2,10 +2,10 @@
 import json
 
 
-# from llm_helper import llm
-# from langchain_core.prompts import PromptTemplate
-# from langchain_core.output_parsers import JsonOutputParser
-# from langchain_core.exceptions import OutputParserException
+from llm_helper import llm
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.exceptions import OutputParserException
 
 #1
 def process_posts(raw_file_path, processed_file_path=None):
@@ -30,32 +30,34 @@ def process_posts(raw_file_path, processed_file_path=None):
 
 
 def extract_metadata(post):
-    return {
-        'line_count': 10
-    }
 
 
-#     template = '''
-#     You are given a LinkedIn post. You need to extract number of lines, language of the post and tags.
-#     1. Return a valid JSON. No preamble.
-#     2. JSON object should have exactly three keys: line_count, language and tags.
-#     3. tags is an array of text tags. Extract maximum two tags.
-#     4. Language should be English or Hinglish (Hinglish means hindi + english)
+
+    template = '''
+    You are given a LinkedIn post. You need to extract number of lines, language of the post and tags.
+    1. Return a valid JSON. No preamble.Return ONLY valid JSON.  
+     Do not include explanations, thoughts, or extra text.  
+     Output must start with {{ and end with }}.  
+    2. JSON object should have exactly three keys: line_count, language and tags.
+    3. tags is an array of text tags. Extract maximum two tags.
+    4. Language should be English or Hinglish (Hinglish means hindi + english)
+
+    Here is the actual post on which you need to perform this task:
+    {post}
+    '''
 #
-#     Here is the actual post on which you need to perform this task:
-#     {post}
-#     '''
-#
-#     pt = PromptTemplate.from_template(template)
-#     chain = pt | llm
-#     response = chain.invoke(input={"post": post})
-#
-#     try:
-#         json_parser = JsonOutputParser()
-#         res = json_parser.parse(response.content)
-#     except OutputParserException:
-#         raise OutputParserException("Context too big. Unable to parse jobs.")
-#     return res
+    pt = PromptTemplate.from_template(template)
+    chain = pt | llm
+    #response = chain.invoke(input={"post": post})#handle emoji input in python
+    safe_post = post.encode("utf-8", "surrogatepass").decode("utf-8", "ignore")
+    response = chain.invoke(input={"post": safe_post})
+
+    try:
+        json_parser = JsonOutputParser()
+        res = json_parser.parse(response.content)
+    except OutputParserException:
+        raise OutputParserException("Context too big. Unable to parse jobs.")
+    return res
 #
 #
 # def get_unified_tags(posts_with_metadata):
