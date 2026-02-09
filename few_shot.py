@@ -1,4 +1,6 @@
 import pandas as pd
+#python -m pip install pandas
+#python -c "import pandas; print(pandas.__version__)"
 import json
 
 
