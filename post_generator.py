@@ -42,11 +42,12 @@ def get_prompt(length, language, tag):
         post_text = post['text']
         prompt += f'\n\n Example {i+1}: \n\n {post_text}'
 
-        if i == 1: # Use max two samples
+        if i == 2: # Use max three samples
             break
 
     return prompt
 
 
 if __name__ == "__main__":
+    #pass
     print(generate_post("Medium", "English", "Mental Health"))
