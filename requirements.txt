@@ -1,4 +1,10 @@
+langchain_core==1.2.10
+langchain_groq==1.1.2
+pandas==3.0.0
+python-dotenv==1.2.1
+streamlit==1.54.0
 #in terminal,paste
 #python -m pip install pipreqs
 #python -m pipreqs . --force
 #& "C:\Users\emstar\AppData\Roaming\Python\Python311\Scripts\pipreqs.exe" . --force
+#streamlit run main.py
