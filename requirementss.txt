@@ -2,3 +2,4 @@
 #python -m pip install pipreqs
 #python -m pipreqs . --force
 #& "C:\Users\emstar\AppData\Roaming\Python\Python311\Scripts\pipreqs.exe" . --force
+#Vercel didn’t really fail—it just didn’t actually build your Streamlit app because Vercel is meant for frontend frameworks like Next.js, not Python/Streamlit apps.
