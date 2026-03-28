@@ -98,4 +98,9 @@ StructuredOutput --> UI
 
 - [Groq](https://groq.com)  
 - [Llama](https://ai.meta.com/llama/)  
-- [Streamlit](https://streamlit.io)  
+- [Streamlit](https://streamlit.io)
+
+
+## 📌 License
+⚠️ All Rights Reserved. This code is for personal use and educational reference only.  
+    Copying or submitting as your own work is strictly prohibited.
